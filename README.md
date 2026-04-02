@@ -2,8 +2,8 @@ La Séquence 4 est l'étape de capitalisation. C'est ici que tu prouves au corre
 
 Voici une structure complète que tu peux copier-coller dans ton fichier README.md (remplace les parties entre crochets par tes informations).
 
-📑 Rapport d'Atelier : From Image to Cluster
-🎯 Objectif du projet
+ Rapport d'Atelier : From Image to Cluster
+ Objectif du projet
 L'objectif de cet atelier était d'automatiser la création d'une image applicative personnalisée et son déploiement sur un cluster Kubernetes (K3d) en utilisant une approche Infrastructure as Code (IaC) avec Packer et Ansible.
 
 🛠️ Stack Technique
