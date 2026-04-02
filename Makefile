@@ -1,0 +1,1 @@
+packer init image.pkr.hcl

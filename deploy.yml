@@ -1,0 +1,48 @@
+---
+- name: Deploiement de l'application Nginx Custom sur K3d
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Creation du Deployment (Les Pods)
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: my-nginx-deployment
+            namespace: default
+          spec:
+            replicas: 2 # On lance 2 instances pour la haute disponibilité
+            selector:
+              matchLabels:
+                app: custom-nginx
+            template:
+              metadata:
+                labels:
+                  app: custom-nginx
+              spec:
+                containers:
+                - name: nginx-container
+                  image: my-custom-nginx:v1
+                  imagePullPolicy: Never # Crucial : dit a K8s d'utiliser l'image importée localement
+                  ports:
+                  - containerPort: 80
+
+    - name: Creation du Service (L'accès réseau)
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: nginx-service
+            namespace: default
+          spec:
+            selector:
+              app: custom-nginx
+            ports:
+              - protocol: TCP
+                port: 80
+                targetPort: 80
+            type: NodePort
